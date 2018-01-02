@@ -54,6 +54,8 @@ body += '</head><body>';
 
 var html_body = '';
 
+var path = require("path");
+
 function toHtmlTable(msg) {
 	//console.log('toHtmlTable() msg:'+msg);
 	
@@ -179,6 +181,9 @@ const requestHandler = (request, response) => {
 		
 		return;
 	}
+	else {
+		return read_file(request.url, response);
+	}
 
 	response.writeHead(200, { 'Content-Type': 'text/html' });
 	response.write(body);
@@ -252,6 +257,39 @@ fs.readFile('./index.html', function (err, html) {
 		console.log(`server is listening on ${port} @`+ new Date());
 	});
 });
+
+function contentType(ext) {
+    var ct;
+
+    switch (ext) {
+    case '.html':	ct = 'text/html';		break;
+    case '.css':	ct = 'text/css';		break;
+    case '.js':		ct = 'text/javascript';	break;
+	case '.gif':	ct = 'image/gif';		break;
+    default:		ct = 'text/plain';		break;
+    }
+
+    return {'Content-Type': ct};
+}
+
+function read_file(filename, response) {
+	//console.log('\n    read_file: ' + filename);
+	fs.readFile("."+filename, function (err, html) {
+
+		if (err) {
+			console.log('Error loading ' + filename);
+            response.writeHead(500);
+            return response.end('Error loading ' + filename);
+        }
+		
+		var ext = path.extname(filename);
+		//console.log('\n    read_file: ext: ' + ext);
+        		
+		response.writeHeader(200, contentType(ext));  
+		response.write(html);
+		response.end();
+	});
+}
 
 
 //*/
