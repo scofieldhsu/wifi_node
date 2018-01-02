@@ -1,0 +1,45 @@
+$ mkdir test_hello/; cd test_hello/
+add binding.gyp:
+{
+  "targets": [
+    {
+      "target_name": "addon",
+      "sources": [ "hello.cc" ]
+    }
+  ]
+
+}
+
+$ node-gyp clean
+
+$ node-gyp rebuild
+($ node-gyp configure)
+($ node-gyp build)
+
+$ node-gyp configure
+
+$ node-gyp build 
+=> build/Release/addon.node
+
+node-gyp clean; node-gyp rebuild; node myJavascriptTest.js
+
+
+http://www.cplusplus.com/reference/thread/thread/
+C++ 11, threading
+
+
+https://stackoverflow.com/questions/35995273/how-to-run-html-file-using-node-js
+How to run html file using node js
+
+http://www.smalljacky.com/programming-language/php/ajax-javascript-jquery-example-for-php/
+Ajax JavaScript 與 jQuery 教學範例 for PHP
+
+https://www.nodebeginner.org/index-zh-tw.html#server-side-javascript
+Node入門
+
+https://dotblogs.com.tw/jhsiao/2014/08/30/146411
+[JavaScript]AJAX基礎入門（搭配使用PHP示範）
+
+http://ithelp.ithome.com.tw/articles/10087627
+Node.jS初學者筆記(3)-用Ajax傳送資料
+
