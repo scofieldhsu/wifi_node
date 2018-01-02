@@ -9,6 +9,15 @@
 * node -v => v6.11.0 
 * node-gyp.cmd -v => v3.4.0 
 
+# my setup
+* export PATH=/drives/d/scofield/python/python-2.7.13.amd64/:$PATH
+* export PATH=/drives/d/scofield/nodejs/node-v6.11.0-win-x64:$PATH
+* export PATH=/drives/d/scofield/nodejs/node-v6.11.0-win-x64/node_modules/npm/bin/node-gyp-bin:$PATH
+
+# my command
+* node-gyp.cmd clean 
+* node-gyp.cmd rebuild
+
 # README #
 
 This README would normally document whatever steps are necessary to get your application up and running.
