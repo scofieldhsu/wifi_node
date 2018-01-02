@@ -2,9 +2,9 @@
 
 
 # my environment 
-Windows 7, 64 bit 
-Visual Studio 2015 community
-'chcp.com 65001' for MobaXterm 
+* Windows 7, 64 bit 
+* Visual Studio 2015 community
+* 'chcp.com 65001' for MobaXterm 
 
 
 # README #
