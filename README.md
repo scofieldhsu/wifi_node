@@ -1,6 +1,12 @@
 # https://github.com/friedrith/node-wifi 
 
 
+# my environment 
+Windows 7, 64 bit 
+Visual Studio 2015 community
+'chcp.com 65001' for MobaXterm 
+
+
 # README #
 
 This README would normally document whatever steps are necessary to get your application up and running.
