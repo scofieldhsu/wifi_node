@@ -1,11 +1,13 @@
 # https://github.com/friedrith/node-wifi 
 
-
 # my environment 
 * Windows 7, 64 bit 
 * Visual Studio 2015 community
 * 'chcp.com 65001' for MobaXterm 
 
+# node-v6.11.0-win-x64 
+* node -v => v6.11.0 
+* node-gyp.cmd -v => v3.4.0 
 
 # README #
 
