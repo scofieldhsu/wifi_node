@@ -141,10 +141,11 @@ const requestHandler = (request, response) => {
 	var getAvailableNetworkList = '';
 	var enumInterfaces = '';
 	if (request.url == '/') {
-		response.writeHeader(200, {"Content-Type": "text/html"});  
+		/*response.writeHeader(200, {"Content-Type": "text/html"});  
         response.write(html_body);  
         response.end();  
-		return;
+		return;*/
+		return read_file("/index.html", response);
 	}
 	else if (request.url == '/getAvailableNetworkList') {
 		addon.wlanapi_async_getAvailableNetworkList( function(msg) {
@@ -235,15 +236,14 @@ const requestHandler = (request, response) => {
 
 const server = http.createServer(requestHandler);
 
-///server.listen(port, (err) => {
-	//if (err) {
-		 //return console.log('something bad happened', err)
-	//}
+server.listen(port, (err) => {
+	if (err) {
+		return console.log('something bad happened', err)
+	}
 
-	//console.log(`server is listening on ${port} @`+ new Date());
-//});
-
-fs.readFile('./index.html', function (err, html) {
+	console.log(`server is listening on ${port} @`+ new Date());
+});
+/*fs.readFile('./index.html', function (err, html) {
 
     if (err) throw err;
 
@@ -256,7 +256,7 @@ fs.readFile('./index.html', function (err, html) {
 
 		console.log(`server is listening on ${port} @`+ new Date());
 	});
-});
+});*/
 
 function contentType(ext) {
     var ct;
