@@ -34,12 +34,11 @@ function getAvailableNetworkList() {
 	}
 }
 
-function OnloadEnumInterfaces() {
-//alert("WlanEnumInterfaces by JavaScript ");
+function handleWlanRequest(wlan_request, html_id) {
 	// 發送 Ajax 查詢請求並處理
 	var request = new XMLHttpRequest();
 	
-	request.open("GET", "/enumInterfaces");//scofield
+	request.open("GET", wlan_request);
 	
 	request.send();
 
@@ -48,53 +47,22 @@ function OnloadEnumInterfaces() {
 		if (request.readyState === 4) {
 			// 伺服器回應成功
 			if (request.status === 200) {
-				document.getElementById("WlanOnLoad").innerHTML = request.responseText;
+				document.getElementById(html_id).innerHTML = request.responseText;
 			} else {
 				alert("發生錯誤: " + request.status);
 			}
 		}
-	}
+	};
+}
+
+function OnloadEnumInterfaces() {
+	handleWlanRequest("/enumInterfaces", "WlanOnLoad");
 }
 
 function enumInterfaces() {
-//alert("WlanGetAvailableNetworkList ");
-	// 發送 Ajax 查詢請求並處理
-	var request = new XMLHttpRequest();
-	
-	request.open("GET", "/enumInterfaces");//scofield
-	
-	request.send();
-
-	request.onreadystatechange = function() {
-		// 伺服器請求完成
-		if (request.readyState === 4) {
-			// 伺服器回應成功
-			if (request.status === 200) {
-				document.getElementById("WlanResult").innerHTML = request.responseText;
-			} else {
-				alert("發生錯誤: " + request.status);
-			}
-		}
-	}
+	handleWlanRequest("/enumInterfaces", "WlanResult");
 }
 
 function getNotifications() {
-	// 發送 Ajax 查詢請求並處理
-	var request = new XMLHttpRequest();
-	
-	request.open("GET", "/getNotifications");//scofield
-	
-	request.send();
-
-	request.onreadystatechange = function() {
-		// 伺服器請求完成
-		if (request.readyState === 4) {
-			// 伺服器回應成功
-			if (request.status === 200) {
-				document.getElementById("WlanResult").innerHTML = request.responseText;
-			} else {
-				alert("發生錯誤: " + request.status);
-			}
-		}
-	}
+	handleWlanRequest("/getNotifications", "WlanResult");
 }
