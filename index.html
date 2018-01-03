@@ -79,6 +79,37 @@ input, button, select {
             </div>
 </div>
 
+		<div data-role="page" id="second">
+            <div data-role="header"><h1>page2 header</h1></div>
+            <div data-role="main" class="ui-content">
+                page2 content
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#home" >page1</a></li>
+                        <li><a href="#second" class="ui-btn-active ui-state-persist">page2</a></li>
+						<li><a href="#third" >page3</a></li>
+                    </ul>
+                </div>
+            </div>
+		</div>
+		
+		<div data-role="page" id="third" ">
+            <div data-role="header"><h1>page3 header</h1></div>
+            <div data-role="main" class="ui-content">
+                page3 content
+			</div>
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#home" >page1</a></li>
+						<li><a href="#second" >page2</a></li>
+                        <li><a href="#third" class="ui-btn-active ui-state-persist">page3</a></li>
+                    </ul>
+                </div>
+            </div>
+		</div>
 
 <script type="text/JavaScript">
 var form1 = '<form id="myform" method="post" action="" onsubmit="alert(this.mytextfield.value)">';
