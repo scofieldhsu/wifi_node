@@ -56,7 +56,7 @@ function handleWlanRequest(wlan_request, html_id) {
 }
 
 function OnloadEnumInterfaces() {
-	handleWlanRequest("/enumInterfaces", "WlanOnLoad");
+	//handleWlanRequest("/enumInterfaces", "WlanOnLoad");
 }
 
 function enumInterfaces() {
@@ -65,4 +65,16 @@ function enumInterfaces() {
 
 function getNotifications() {
 	handleWlanRequest("/getNotifications", "WlanResult");
+}
+
+function page1_request() {
+	handleWlanRequest("/enumInterfaces", "page1_content");
+}
+
+function page2_request() {
+	handleWlanRequest("/getAvailableNetworkList", "page2_content");
+}
+
+function page3_request() {
+	handleWlanRequest("/getNotifications", "page3_content");
 }

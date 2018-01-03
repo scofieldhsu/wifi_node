@@ -23,7 +23,7 @@ input, button, select {
 
 <div data-role="page" id="home" >
             <div data-role="header"><h1>page1 header</h1></div>
-			<div data-role="main" class="ui-content">
+			<div data-role="main" class="ui-content" id="page1_content">
                 page1 content
 				
 
@@ -74,8 +74,8 @@ input, button, select {
                 <div data-role="navbar">
                     <ul>
                         <li><a href="#home" class="ui-btn-active ui-state-persist">page1</a></li>
-                        <li><a href="#second" >page2</a></li>
-						<li><a href="#third" >page3</a></li>
+                        <li><a href="#second" onclick="page2_request()">page2</a></li>
+						<li><a href="#third" onclick="page3_request()">page3</a></li>
                     </ul>
 				</div>
             </div>
@@ -83,15 +83,15 @@ input, button, select {
 
 		<div data-role="page" id="second">
             <div data-role="header"><h1>page2 header</h1></div>
-            <div data-role="main" class="ui-content">
+            <div data-role="main" class="ui-content" id="page2_content">
                 page2 content
             </div>
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#home" >page1</a></li>
+                        <li><a href="#home" onclick="page1_request()">page1</a></li>
                         <li><a href="#second" class="ui-btn-active ui-state-persist">page2</a></li>
-						<li><a href="#third" >page3</a></li>
+						<li><a href="#third" onclick="page3_request()">page3</a></li>
                     </ul>
                 </div>
             </div>
@@ -99,14 +99,14 @@ input, button, select {
 		
 		<div data-role="page" id="third" ">
             <div data-role="header"><h1>page3 header</h1></div>
-            <div data-role="main" class="ui-content">
+            <div data-role="main" class="ui-content" id="page3_content">
                 page3 content
 			</div>
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#home" >page1</a></li>
-						<li><a href="#second" >page2</a></li>
+                        <li><a href="#home" onclick="page1_request()">page1</a></li>
+						<li><a href="#second" onclick="page2_request()">page2</a></li>
                         <li><a href="#third" class="ui-btn-active ui-state-persist">page3</a></li>
                     </ul>
                 </div>
