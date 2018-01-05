@@ -19,6 +19,10 @@ using v8::String;
 using v8::Value;*/
 using namespace v8;//scofield
 using namespace std;//scofield
+using rapidjson::Document;
+using rapidjson::StringBuffer;
+using rapidjson::StringStream;
+using rapidjson::Writer;
 
 
 /*
@@ -88,6 +92,7 @@ void method__wlan_async_enumInterfaces(const FunctionCallbackInfo<Value>& args) 
 	a_thread.join();*/
 
 	enumInterfaces(woutput);
+	//woutput = L"{\"project\":\"rapidjson\",\"stars\":10}";
 	wcstombs(output, woutput.c_str(), 512);	
 
 	Isolate* isolate = args.GetIsolate();
@@ -111,11 +116,47 @@ void method__wlan_async_getAvailableNetworkList(const FunctionCallbackInfo<Value
 	cb->Call(isolate->GetCurrentContext()->Global(), argc, argv);
 }
 
+void testJson() {
+	StringBuffer buffer;
+	Writer<StringBuffer> writer(buffer);
+	
+	// 1. Parse a JSON string into DOM.
+    const char* json = "{\"project\":\"rapidjson\",\"stars\":10}";
+    Document d;
+	
+const char json2[] = "[1, 2, 3, 4]";
+StringStream s1(json2);
+d.ParseStream(s1);
+buffer.Clear();
+writer.Reset(buffer);
+d.Accept(writer);
+std::cout << buffer.GetString() << std::endl;
+	
+    d.Parse(json);
+buffer.Clear();
+writer.Reset(buffer);
+d.Accept(writer);
+std::cout << buffer.GetString() << std::endl;
+	
+	// 2. Modify it by DOM.
+    rapidjson::Value& s = d["stars"];
+    s.SetInt(s.GetInt() + 1);
+	
+	// 3. Stringify the DOM
+	buffer.Clear();
+	writer.Reset(buffer);
+    d.Accept(writer);
+	
+	// Output {"project":"rapidjson","stars":11}
+    std::cout << buffer.GetString() << std::endl;
+}
 
 
 void init(Local<Object> exports) {
 	NODE_SET_METHOD(exports, "hello", Method);
 
+	testJson();
+	
 	init_wlan();
 	NODE_SET_METHOD(exports, "wlanapi_sync_enumInterfaces", method__wlan_sync_enumInterfaces);//scofield
 	NODE_SET_METHOD(exports, "wlanapi_async_enumInterfaces", method__wlan_async_enumInterfaces);//scofield
