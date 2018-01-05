@@ -85,12 +85,28 @@ function socket_io() {
 	var socket = io.connect();
 
 	socket.on('connect', function() {
-		console.log('Client connected');
+		//console.log('Client connected');
 		
 		socket.emit('wifi', {'get':'enumInterfaces'}, (data) => {
 		//socket.emit('wifi', {'set':'enumInterfaces'}, (data) => {
 			console.log(data);
-			document.getElementById("WlanResult").innerHTML = data;
+			//document.getElementById("WlanResult").innerHTML = data;
+			
+			var obj = JSON.parse(data);
+			//console.log('enumInterfaces: '+JSON.stringify(obj));
+			console.log('InterfaceDescription: '+obj.InterfaceInfos[0].InterfaceDescription);
+			//document.getElementById("WlanResult").innerHTML = JSON.stringify(obj);
+			var html_msg = "Number of Interfaces: " + obj.NumInterfaces + "<br>"
+				+ "Current Interface Index: " + obj.CurrentIndex + "<br>"
+				+ "Interface Information: <br>"
+				+ "Interface Index: " + obj.InterfaceInfos[0].InterfaceIndex + "<br>"
+				+ "Interface GUID: " + obj.InterfaceInfos[0].InterfaceGUID + "<br>"
+				+ "Interface Description: " + obj.InterfaceInfos[0].InterfaceDescription + "<br>"
+				+ "Interface State: " + obj.InterfaceInfos[0].InterfaceState + "<br>";
+			document.getElementById("WlanResult").innerHTML = html_msg;
+			
+			var resultSet = obj.InterfaceInfos;
+			JSON2Table('table', resultSet, 'json', {id:'test'});
 		});
 	});
 	

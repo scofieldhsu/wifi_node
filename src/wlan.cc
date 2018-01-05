@@ -435,19 +435,23 @@ void printEnumInterfaces(wstring& output, PWLAN_INTERFACE_INFO_LIST pIfList) {
 	PWLAN_INTERFACE_INFO pIfInfo = NULL;
 	
 	wprintf(L"Num Entries: %lu\n", pIfList->dwNumberOfItems);
-	output += L"Num Entries: "+ to_wstring(pIfList->dwNumberOfItems) + L"<br>\n";//scofield
+	//output += L"Num Entries: "+ to_wstring(pIfList->dwNumberOfItems) + L"<br>\n";//scofield
+	output += L"\"NumInterfaces\":\""+ to_wstring(pIfList->dwNumberOfItems) + L"\"";//scofield
 
 	wprintf(L"Current Index: %lu\n", pIfList->dwIndex);
-	output += L"Current Index: " + to_wstring(pIfList->dwIndex) + L"<br>\n";//scofield
+	//output += L"Current Index: " + to_wstring(pIfList->dwIndex) + L"<br>\n";//scofield
+	output += L",\"CurrentIndex\":\"" + to_wstring(pIfList->dwIndex) + L"\"";//scofield
 
 //printf("\n\toutput: \n%s", output);
 
 		//g_IfInfo = pIfList->InterfaceInfo[pIfList->dwIndex];//scofield
 
+		output += L",\"InterfaceInfos\":[";
 		for (i = 0; i < (int) pIfList->dwNumberOfItems; i++) {
 			pIfInfo = (WLAN_INTERFACE_INFO *) &pIfList->InterfaceInfo[i];
 			wprintf(L"	Interface Index[%d]:\t %lu\n", i, i);
-			output += L"  Interface Index[" + to_wstring(i) + L"]:\t " + to_wstring(i) + L"<br>\n";//scofield
+			//output += L"  Interface Index[" + to_wstring(i) + L"]:\t " + to_wstring(i) + L"<br>\n";//scofield
+			output += L"{\"InterfaceIndex\":\"" + to_wstring(i) + L"\"";//scofield
 
 			iRet = StringFromGUID2(pIfInfo->InterfaceGuid, (LPOLESTR) &GuidString, 39); 
 			// For c rather than C++ source code, the above line needs to be
@@ -455,75 +459,97 @@ void printEnumInterfaces(wstring& output, PWLAN_INTERFACE_INFO_LIST pIfList) {
 			if (iRet == 0) {
 				wprintf(L"StringFromGUID2 failed\n");
 				//s += sprintf(output+s, "StringFromGUID2 failed<br>\n");//scofield
-				output += L"StringFromGUID2 failed<br>\n";//scofield
+				//output += L"StringFromGUID2 failed<br>\n";//scofield
 			}
 			else {
 				wprintf(L"	InterfaceGUID[%d]: %ws\n",i, GuidString);
 				//s += sprintf(output+s, "  InterfaceGUID[%d]: %ws<br>\n",i, GuidString);//scofield
-				output += L"  InterfaceGUID[" + to_wstring(i) + L"]: " + GuidString + L"<br>\n";//scofield
+				//output += L"  InterfaceGUID[" + to_wstring(i) + L"]: " + GuidString + L"<br>\n";//scofield
+				output += L",\"InterfaceGUID\":\"";
+				output += GuidString;
+				output += L"\"";
 			}	 
 			wprintf(L"	Interface Description[%d]: %ws", i, pIfInfo->strInterfaceDescription);
 			//s += sprintf(output+s, "  Interface Description[%d]: %ws", i, pIfInfo->strInterfaceDescription);//scofield
-			output += L"  Interface Description[" + to_wstring(i) + L"]: " + pIfInfo->strInterfaceDescription;//scofield
+			//output += L"  Interface Description[" + to_wstring(i) + L"]: " + pIfInfo->strInterfaceDescription;//scofield
+			output += L",\"InterfaceDescription\":\"";
+			output += pIfInfo->strInterfaceDescription;
+			output += L"\"";
 			
 			wprintf(L"\n");
 			//s += sprintf(output+s, "<br>\n");//scofield
-			output += L"<br>\n";//scofield
+			//output += L"<br>\n";//scofield
 			
 			wprintf(L"	Interface State[%d]:\t ", i);
 			//s += sprintf(output+s, "  Interface State[%d]:\t ", i);//scofield
-			output += L"  Interface State[" + to_wstring(i) + L"]:\t ";//scofield
+			//output += L"  Interface State[" + to_wstring(i) + L"]:\t ";//scofield
+			output += L",\"InterfaceState\":";
 			
 			switch (pIfInfo->isState) {
 			case wlan_interface_state_not_ready:
 				wprintf(L"Not ready\n");
 				//s += sprintf(output+s, "Not ready<br>\n");//scofield
-				output += L"Not ready<br>\n";//scofield
+				//output += L"Not ready<br>\n";//scofield
+				output += L"\"Not ready\"";
 				break;
 			case wlan_interface_state_connected:
 				wprintf(L"Connected\n");
 				//s += sprintf(output+s, "Connected<br>\n");//scofield
-				output += L"Connected<br>\n";//scofield
+				//output += L"Connected<br>\n";//scofield
+				output += L"\"Connected\"";
 				break;
 			case wlan_interface_state_ad_hoc_network_formed:
 				wprintf(L"First node in a ad hoc network\n");
 				//s += sprintf(output+s, "First node in a ad hoc network<br>\n");//scofield
-				output += L"First node in a ad hoc network<br>\n";//scofield
+				//output += L"First node in a ad hoc network<br>\n";//scofield
+				output += L"\"First node in a ad hoc network\"";
 				break;
 			case wlan_interface_state_disconnecting:
 				wprintf(L"Disconnecting\n");
 				//s += sprintf(output+s, "Disconnecting<br>\n");//scofield
-				output += L"Disconnecting<br>\n";//scofield
+				//output += L"Disconnecting<br>\n";//scofield
+				output += L"\"Disconnecting\"";
 				break;
 			case wlan_interface_state_disconnected:
 				wprintf(L"Not connected\n");
 				//s += sprintf(output+s, "Not connected<br>\n");//scofield
-				output += L"Not connected<br>\n";//scofield
+				//output += L"Not connected<br>\n";//scofield
+				output += L"\"Not connected\"";
 				break;
 			case wlan_interface_state_associating:
 				wprintf(L"Attempting to associate with a network\n");
 				//s += sprintf(output+s, "Attempting to associate with a network<br>\n");//scofield
-				output += L"Attempting to associate with a network<br>\n";//scofield
+				//output += L"Attempting to associate with a network<br>\n";//scofield
+				output += L"\"Attempting to associate with a network\"";
 				break;
 			case wlan_interface_state_discovering:
 				wprintf(L"Auto configuration is discovering settings for the network\n");
 				//s += sprintf(output+s, "Auto configuration is discovering settings for the network<br>\n");//scofield
-				output += L"Auto configuration is discovering settings for the network<br>\n";//scofield
+				//output += L"Auto configuration is discovering settings for the network<br>\n";//scofield
+				output += L"\"Auto configuration is discovering settings for the network\"";
 				break;
 			case wlan_interface_state_authenticating:
 				wprintf(L"In process of authenticating\n");
 				//s += sprintf(output+s, "In process of authenticating<br>\n");//scofield
-				output += L"In process of authenticating<br>\n";//scofield
+				//output += L"In process of authenticating<br>\n";//scofield
+				output += L"\"In process of authenticating\"";
 				break;
 			default:
 				wprintf(L"Unknown state %ld\n", pIfInfo->isState);
 				//s += sprintf(output+s, "Unknown state %ld<br>\n", pIfInfo->isState);//scofield
-				output += L"Unknown state " + to_wstring(pIfInfo->isState) + L"<br>\n";//scofield
+				//output += L"Unknown state " + to_wstring(pIfInfo->isState) + L"<br>\n";//scofield
+				output += L"\"Unknown state " + to_wstring(pIfInfo->isState) + L"\"";
 				break;
 			}
 			wprintf(L"\n");
 			//s += sprintf(output+s, "<br>\n");//scofield
+			
+			if (pIfList->dwNumberOfItems > 1)
+				output += L"},";
+			else 
+				output += L"}";
 		}
+		output += L"]";
 	}
 
 void getRegionList(wstring& output) {
@@ -696,17 +722,20 @@ int enumInterfaces(wstring& output) {
 
 	g_IfInfo = pIfList->InterfaceInfo[pIfList->dwIndex];//scofield
 
+	output = L"{";
 	printEnumInterfaces(output, pIfList);
+	output += L"}";
 
 	if (pIfList != NULL) {
 		WlanFreeMemory(pIfList);
 		pIfList = NULL;
 	}
 
-	getCurrentChannel(output);
-	getCurrentMode(output);
-	getRegionList(output);
-	getAutoConf(output);
+	//getCurrentChannel(output);
+	//getCurrentMode(output);
+	//getRegionList(output);
+	//getAutoConf(output);
+	
 	//setAutoConf(output, true);
 	//getAutoConf(output);
 	
