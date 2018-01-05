@@ -18,6 +18,17 @@ input, button, select {
 
 <script type="text/javascript" src="js/wlan.js"></script>
 
+<!--
+https://www.npmjs.com/package/socket.io-client 
+https://github.com/socketio/socket.io-client 
+https://github.com/socketio/socket.io-client/blob/master/docs/API.md 
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+copy from ./node_modules/socket.io-client/dist/socket.io.js as socket.io-client.js
+-->
+<script type="text/javascript" src="js/socket.io-client.js"></script>
+
+<link rel=”shortcut icon” type=”image/x-icon” href=”/favicon.ico”>
+
 </head>
 <body onload="OnloadEnumInterfaces()">
 
@@ -114,6 +125,13 @@ input, button, select {
 		</div>
 
 <script type="text/JavaScript">
+/*var socket = io.connect();
+socket.on('message', function(data){
+	console.log("html: "+data.msg);
+	console.log("html: "+data.date);
+	document.getElementById("WlanResult").innerHTML = JSON.stringify(data);
+});*/
+
 var form1 = '<form id="myform" method="post" action="" onsubmit="alert(this.mytextfield.value)">';
 form1 += 'text field: <input type="text" name="mytextfield"><br>'
 form1 += '<input type="submit" value="send it now!"></form><br>';
@@ -195,10 +213,10 @@ document.getElementById("save").onclick = function() {
 
 
 
-document.getElementById("clear_WlanGetAvailableNetworkList").onclick = function() {
+/*document.getElementById("clear_WlanGetAvailableNetworkList").onclick = function() {
 alert("clear_WlanGetAvailableNetworkList ");
 	document.getElementById("result_WlanGetAvailableNetworkList").innerHTML = '';
-}
+}*/
 
 </script>
 

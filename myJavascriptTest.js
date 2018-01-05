@@ -56,6 +56,8 @@ var html_body = '';
 
 var path = require("path");
 
+var io = require('socket.io'); // 加入 Socket.IO
+
 function toHtmlTable(msg) {
 	//console.log('toHtmlTable() msg:'+msg);
 	
@@ -258,6 +260,31 @@ server.listen(port, (err) => {
 	});
 });*/
 
+var serv_io = io.listen(server);// 開啟 Socket.IO 的 listener
+serv_io.sockets.on('connection', function(socket) {
+	var _date = new Date();
+	socket.emit('message', {'msg':'hello world', 'date':_date});
+	
+	socket.on('wifi', (data, fn) => {
+		console.log("wifi: get: "+data.get);
+		
+		switch (data.get) {
+		case 'enumInterfaces':	
+			addon.wlanapi_async_enumInterfaces( function(msg) {
+				//console.log("ferret: msg:\n"+msg);
+				fn(msg);
+			});
+			break;
+    
+		default:
+			console.log("wifi: get?: "+data.get);
+			break;
+		}
+		
+		
+	});
+});
+
 function contentType(ext) {
     var ct;
 
@@ -266,6 +293,7 @@ function contentType(ext) {
     case '.css':	ct = 'text/css';		break;
     case '.js':		ct = 'text/javascript';	break;
 	case '.gif':	ct = 'image/gif';		break;
+	case '.ico':	ct = 'image/x-icon';		break;
     default:		ct = 'text/plain';		break;
     }
 

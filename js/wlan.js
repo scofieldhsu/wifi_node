@@ -57,6 +57,7 @@ function handleWlanRequest(wlan_request, html_id) {
 
 function OnloadEnumInterfaces() {
 	//handleWlanRequest("/enumInterfaces", "WlanOnLoad");
+	socket_io();
 }
 
 function enumInterfaces() {
@@ -77,4 +78,39 @@ function page2_request() {
 
 function page3_request() {
 	handleWlanRequest("/getNotifications", "page3_content");
+}
+
+function socket_io() {
+	//var socket = io.connect("http://127.0.0.1:8888");//it will fail when connecting from another device
+	var socket = io.connect();
+
+	socket.on('connect', function() {
+		console.log('Client connected');
+		
+		socket.emit('wifi', {'get':'enumInterfaces'}, (data) => {
+		//socket.emit('wifi', {'set':'enumInterfaces'}, (data) => {
+			console.log(data);
+			document.getElementById("WlanResult").innerHTML = data;
+		});
+	});
+	
+	socket.on('connect_error', function(error) {
+		console.log('connect_error: '+error);
+	});
+	
+	socket.on('reconnect_attempt', (attemptNumber) => {
+		console.log('reconnect_attempt: '+attemptNumber);
+	});
+	
+	socket.on('error', function(error) {
+		console.log('error: '+error);
+	});
+
+	socket.on('message', function(data){
+		console.log(data.msg);
+		console.log(data.date);
+		document.getElementById("WlanResult").innerHTML = JSON.stringify(data);
+	});
+	
+	//socket.emit('ferret', {'name':'tobi'});
 }
