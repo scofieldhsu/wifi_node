@@ -18,6 +18,8 @@ input, button, select {
 
 <script type="text/javascript" src="js/wlan.js"></script>
 
+<script src="js/JSON2Table.js" charset="UTF-8"></script>
+
 <!--
 https://www.npmjs.com/package/socket.io-client 
 https://github.com/socketio/socket.io-client 
@@ -31,6 +33,8 @@ copy from ./node_modules/socket.io-client/dist/socket.io.js as socket.io-client.
 
 </head>
 <body onload="OnloadEnumInterfaces()">
+
+<div id="table"></div>
 
 <div data-role="page" id="home" >
             <div data-role="header"><h1>page1 header</h1></div>
