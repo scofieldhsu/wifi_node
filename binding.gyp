@@ -2,7 +2,7 @@
   "targets": [
     {
       "target_name": "addon",
-      "sources": [ "src/hello.cc", "src/wlan.cc" ]
+      "sources": [ "src/init.cc", "src/wlan.cc" ]
     }
   ]
 
