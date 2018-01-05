@@ -13,7 +13,13 @@ WLAN_INTF_OPCODE enumeration
 #include <string>//scofield
 #include <time.h>//scofield
 
+#include <iostream>
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
 
+
+//using namespace rapidjson;
 using namespace std;//scofield
 
 
