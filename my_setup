@@ -1,0 +1,5 @@
+chcp.com 65001
+export PATH=/drives/d/scofield/tools/nodejs/node-v8.9.4-win-x64:$PATH
+export PATH=/drives/d/scofield/tools/nodejs/node-v8.9.4-win-x64/node_modules/npm/bin/node-gyp-bin/:$PATH
+export PATH=/drives/d/scofield/tools/python/python-2.7.14.amd64:$PATH
+
