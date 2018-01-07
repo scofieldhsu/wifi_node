@@ -98,15 +98,36 @@ function socket_io() {
 			//document.getElementById("WlanResult").innerHTML = JSON.stringify(obj);
 			var html_msg = "Number of Interfaces: " + obj.NumInterfaces + "<br>"
 				+ "Current Interface Index: " + obj.CurrentIndex + "<br>"
-				+ "Interface Information: <br>"
-				+ "Interface Index: " + obj.InterfaceInfos[0].InterfaceIndex + "<br>"
-				+ "Interface GUID: " + obj.InterfaceInfos[0].InterfaceGUID + "<br>"
-				+ "Interface Description: " + obj.InterfaceInfos[0].InterfaceDescription + "<br>"
-				+ "Interface State: " + obj.InterfaceInfos[0].InterfaceState + "<br>";
-			document.getElementById("WlanResult").innerHTML = html_msg;
+				+ "Interface Information: <br>";
+			document.getElementById("WlanJSONResult").innerHTML = html_msg;
 			
-			var resultSet = obj.InterfaceInfos;
-			JSON2Table('table', resultSet, 'json', {id:'test'});
+			//var resultSet = obj.InterfaceInfos;
+			//JSON2Table('table', resultSet, 'json', {id:'test'});
+			
+			var NumInterfaces = parseInt(obj.NumInterfaces);
+			
+			//<!--  w ww  .ja  v  a 2  s.  c  om-->
+			var ul=document.createElement('ul');
+			ul.setAttribute('data-role', 'listview');
+			for(i=0; i<NumInterfaces; i++)
+			{
+				var li=document.createElement('li');
+				li.innerHTML="InterfaceIndex: "+obj.InterfaceInfos[i].InterfaceIndex;
+				ul.appendChild(li);
+				
+				li=document.createElement('li');
+				li.innerHTML="InterfaceGUID: "+obj.InterfaceInfos[i].InterfaceGUID;
+				ul.appendChild(li);
+				
+				li=document.createElement('li');
+				li.innerHTML="InterfaceDescription: "+obj.InterfaceInfos[i].InterfaceDescription;
+				ul.appendChild(li);
+				
+				li=document.createElement('li');
+				li.innerHTML="InterfaceState: "+obj.InterfaceInfos[i].InterfaceState;
+				ul.appendChild(li);
+			}
+			document.getElementById('WlanJSONResult').appendChild(ul);
 		});
 	});
 	
