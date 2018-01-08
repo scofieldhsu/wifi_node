@@ -1,0 +1,4 @@
+set PATH=d:\scofield\python\python-2.7.13.amd64;%PATH%
+set PATH=d:\scofield\nodejs\node-v8.9.4-win-x64;%PATH%
+set PATH=d:\scofield\nodejs\node-v8.9.4-win-x64\node_modules\npm\bin\node-gyp-bin;%PATH%
+
