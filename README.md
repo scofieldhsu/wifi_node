@@ -1,3 +1,7 @@
+# WiFi Webpage configuration of Windows PC with Node.js
+Use Node.js Addons mechanism to invoke “Native Wifi API” of Windows. 
+You can use browser to get wifi adapter status, such as: enumerate wifi interfaces, get available wifi network list, and get wifi notifications of local PC. 
+
 # https://github.com/friedrith/node-wifi 
 
 # my environment 
