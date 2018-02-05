@@ -148,6 +148,9 @@ const requestHandler = (request, response) => {
         response.end();  
 		return;*/
 		return read_file("/index.html", response);
+		//return read_file("/fb_video.html", response);
+		//return read_file("/fb_login.html", response);
+		//return read_file("/html5_video.html", response);
 	}
 	else if (request.url == '/getAvailableNetworkList') {
 		addon.wlanapi_async_getAvailableNetworkList( function(msg) {
@@ -166,7 +169,7 @@ const requestHandler = (request, response) => {
 			getAvailableNetworkList = msg;
 
 			response.writeHeader(200, {"Content-Type": "text/plaintext"});  
-			response.write(toHtmlTable(msg));
+			//response.write(toHtmlTable(msg));
 			//response.write('<button id="clear_WlanGetAvailableNetworkList">clear result of available wifi network list</button>');
 			response.end();
 		});
@@ -226,10 +229,10 @@ const requestHandler = (request, response) => {
 	//response.write('<div id="div1">'+enumInterfaces+'</div>');
 	//response.write('<div id="div2">'+getAvailableNetworkList+'</div>');
 
-	var table_content = '';
+	/*var table_content = '';
 	if (enumInterfaces != '')			table_content = toHtmlTable(enumInterfaces);
 	if (getAvailableNetworkList != '')	table_content = toHtmlTable(getAvailableNetworkList);
-	response.write(table_content);
+	response.write(table_content);*/
 
 	response.write('</body></html>');
 	response.end();
@@ -262,8 +265,8 @@ server.listen(port, (err) => {
 
 var serv_io = io.listen(server);// 開啟 Socket.IO 的 listener
 serv_io.sockets.on('connection', function(socket) {
-	var _date = new Date();
-	socket.emit('message', {'msg':'hello world', 'date':_date});
+	//var _date = new Date();
+	//socket.emit('message', {'msg':'hello world', 'date':_date});
 	
 	socket.on('wifi', (data, fn) => {
 		console.log("wifi: get: "+data.get);

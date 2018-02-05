@@ -1,4 +1,4 @@
-
+/*
 function getAvailableNetworkList() {
 //alert("WlanGetAvailableNetworkList ");
 	// 發送 Ajax 查詢請求並處理
@@ -26,13 +26,14 @@ function getAvailableNetworkList() {
 						document.getElementById("searchResult").innerHTML = data.msg;
 					}
 				}*/
-				document.getElementById("WlanResult").innerHTML = request.responseText;
+				/*document.getElementById("WlanResult").innerHTML = request.responseText;
 			} else {
 				alert("發生錯誤: " + request.status);
 			}
 		}
 	}
 }
+*/
 
 function handleWlanRequest(wlan_request, html_id) {
 	// 發送 Ajax 查詢請求並處理
@@ -61,7 +62,14 @@ function OnloadEnumInterfaces() {
 }
 
 function enumInterfaces() {
-	handleWlanRequest("/enumInterfaces", "WlanResult");
+	document.getElementById("WlanResult").innerHTML = "";
+	//handleWlanRequest("/enumInterfaces", "WlanResult");
+	socket_io();
+}
+
+function getAvailableNetworkList() {
+	document.getElementById("WlanJSONResult").innerHTML = "";
+	handleWlanRequest("/getAvailableNetworkList", "WlanResult");
 }
 
 function getNotifications() {
@@ -69,7 +77,8 @@ function getNotifications() {
 }
 
 function page1_request() {
-	handleWlanRequest("/enumInterfaces", "page1_content");
+	//handleWlanRequest("/enumInterfaces", "page1_content");
+	socket_io();
 }
 
 function page2_request() {

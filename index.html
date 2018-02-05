@@ -34,16 +34,16 @@ copy from ./node_modules/socket.io-client/dist/socket.io.js as socket.io-client.
 </head>
 <body onload="OnloadEnumInterfaces()">
 
-<div id="table"></div>
+<!--<div id="table"></div>-->
 
 <div data-role="page" id="home" >
             <div data-role="header"><h1>page1 header</h1></div>
 			<div data-role="main" class="ui-content" id="page1_content">
-                page1 content
 				
 
-<p id="WlanOnLoad"></p>
+<!--<p id="WlanOnLoad"></p>-->
 
+<!--
 <h1>查詢員工</h1>
 <label for="keyword">請輸入員工編號：</label>
 <input type="text" id="keyword">
@@ -51,7 +51,6 @@ copy from ./node_modules/socket.io-client/dist/socket.io.js as socket.io-client.
 <button id="search">查詢</button>
 <p id="searchResult"></p>
 
-<!--
 <h1>新建員工</h1>
 <label for="staffNumber">請輸入員工編號：</label>
 <input type="text" id="staffNumber"><br>
@@ -138,6 +137,7 @@ socket.on('message', function(data){
 	document.getElementById("WlanResult").innerHTML = JSON.stringify(data);
 });*/
 
+/*
 var form1 = '<form id="myform" method="post" action="" onsubmit="alert(this.mytextfield.value)">';
 form1 += 'text field: <input type="text" name="mytextfield"><br>'
 form1 += '<input type="submit" value="send it now!"></form><br>';
@@ -177,7 +177,6 @@ document.getElementById("search").onclick = function() {
 	}
 }
 
-/*
 document.getElementById("save").onclick = function() {
 	// 發送 Ajax 查詢請求並處理
 	var request = new XMLHttpRequest();
